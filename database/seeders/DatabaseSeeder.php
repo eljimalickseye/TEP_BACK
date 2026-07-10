@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
 
         // 3. Create Vehicles associated with GIEs
         $vehicle1 = Vehicle::create([
-            'name' => 'Minibus Tata AFTU 36',
+            'name' => "Mini-car Chang'An AFTU 36",
             'license_plate' => 'DK-1234-A',
             'driver_id' => $driver1->id,
             'capacity' => 14,
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $vehicle2 = Vehicle::create([
-            'name' => 'Car Dakar Dem Dikk Express',
+            'name' => "Mini-car Chang'An DDD Express",
             'license_plate' => 'TH-5678-B',
             'driver_id' => $driver2->id,
             'capacity' => 45,
