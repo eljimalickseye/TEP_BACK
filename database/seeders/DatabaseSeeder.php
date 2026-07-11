@@ -174,7 +174,7 @@ class DatabaseSeeder extends Seeder
             // Random trip
             $trip = rand(0, 1) === 0 ? $trip1 : $trip2;
             
-            Ticket::create([
+            \App\Models\Ticket::create([
                 'trip_id' => $trip->id,
                 'user_id' => $users[rand(0, count($users) - 1)]->id,
                 'seat_number' => rand(1, 14),
