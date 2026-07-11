@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tickets/book', [TicketController::class, 'book']);
     Route::post('/tickets/book-payment', [TicketController::class, 'bookWithPayment']);
     Route::get('/tickets/my', [TicketController::class, 'myTickets']);
+    Route::get('/admin/tickets', [TicketController::class, 'allTickets']);
     Route::post('/tickets/scan', [TicketController::class, 'scan']);
     Route::get('/payments/status/{externalTransactionId}', [TicketController::class, 'checkPaymentStatus']);
 

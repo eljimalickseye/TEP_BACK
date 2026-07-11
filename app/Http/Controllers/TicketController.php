@@ -306,6 +306,16 @@ class TicketController extends Controller
         ], 200);
     }
 
+    public function allTickets(Request $request)
+    {
+        if ($request->user()->role !== 'admin') {
+            return response(['message' => 'Non autorisé'], 403);
+        }
+
+        $tickets = Ticket::with(['trip.line', 'user'])->orderBy('created_at', 'desc')->get();
+        return response($tickets, 200);
+    }
+
     /**
      * Format Senegalese phone number to Intech standard
      */
