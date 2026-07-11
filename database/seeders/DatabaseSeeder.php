@@ -162,5 +162,31 @@ class DatabaseSeeder extends Seeder
             'speed' => 65.0,
             'heading' => 120.0,
         ]);
+
+        // 7. Create historical tickets over the past 7 days for analytics
+        $days = 7;
+        $users = [$admin, $driver1, $driver2, $client];
+        
+        for ($i = 0; $i < 40; $i++) {
+            $randomDayOffset = rand(0, $days - 1);
+            $createdAt = Carbon::now()->subDays($randomDayOffset)->subHours(rand(1, 23));
+            
+            // Random trip
+            $trip = rand(0, 1) === 0 ? $trip1 : $trip2;
+            
+            Ticket::create([
+                'trip_id' => $trip->id,
+                'user_id' => $users[rand(0, count($users) - 1)]->id,
+                'seat_number' => rand(1, 14),
+                'price' => $trip->line->base_price,
+                'ticket_code' => 'TEP-' . strtoupper(\Illuminate\Support\Str::random(8)),
+                'status' => rand(0, 10) > 2 ? 'used' : 'booked',
+                'external_transaction_id' => 'TEP_MOCK_' . \Illuminate\Support\Str::random(10),
+                'payment_method' => rand(0, 1) === 0 ? 'wave' : 'orange',
+                'payment_status' => 'success',
+                'created_at' => $createdAt,
+                'updated_at' => $createdAt,
+            ]);
+        }
     }
 }

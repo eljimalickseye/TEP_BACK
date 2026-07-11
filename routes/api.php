@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/payments/callback', [TicketController::class, 'paymentsCallback']);
 
 // Protected routes (Sanctum)
 Route::middleware('auth:sanctum')->group(function () {
@@ -33,8 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Bookings / Tickets
     Route::post('/tickets/book', [TicketController::class, 'book']);
+    Route::post('/tickets/book-payment', [TicketController::class, 'bookWithPayment']);
     Route::get('/tickets/my', [TicketController::class, 'myTickets']);
     Route::post('/tickets/scan', [TicketController::class, 'scan']);
+    Route::get('/payments/status/{externalTransactionId}', [TicketController::class, 'checkPaymentStatus']);
 
     // Real-time GPS Tracking
     Route::post('/tracking/update', [TrackingController::class, 'updatePosition']);
