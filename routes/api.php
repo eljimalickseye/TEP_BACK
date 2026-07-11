@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/lines/{id}', [LineController::class, 'show']);
     Route::get('/trips', [LineController::class, 'getTrips']);
     Route::post('/admin/lines', [LineController::class, 'store']);
+    Route::get('/admin/vehicles', [LineController::class, 'getVehicles']);
 
     // Bookings / Tickets
     Route::post('/tickets/book', [TicketController::class, 'book']);

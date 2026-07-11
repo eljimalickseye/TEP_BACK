@@ -69,4 +69,14 @@ class LineController extends Controller
 
         return response($line->load(['stops', 'gie']), 201);
     }
+
+    public function getVehicles(Request $request)
+    {
+        if ($request->user()->role !== 'admin') {
+            return response(['message' => 'Non autorisé'], 403);
+        }
+
+        $vehicles = \App\Models\Vehicle::with('driver')->get();
+        return response($vehicles, 200);
+    }
 }
